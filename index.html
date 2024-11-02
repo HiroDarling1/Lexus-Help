@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexus Help</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Lexus Help</h1>
+        <nav>
+            <ul>
+                <li><a href="https://one.tis.toyota.com/" target="_blank">TIS</a></li>
+                <li><a href="https://www.adp.com/" target="_blank">ADP</a></li>
+                <li><a href="https://www.cdkglobal.com/" target="_blank">CDK</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hour-tracker">
+            <h2>Track Your Hours</h2>
+            <form id="hours-form">
+                <label for="hourly-rate">Hourly Rate ($):</label>
+                <input type="number" id="hourly-rate" required>
+
+                <label for="week-1-hours">Week 1 Hours:</label>
+                <input type="number" id="week-1-hours" required>
+
+                <label for="week-2-hours">Week 2 Hours:</label>
+                <input type="number" id="week-2-hours" required>
+
+                <button type="submit">Calculate Gross Pay</button>
+            </form>
+            <p id="result"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Lexus Help</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
