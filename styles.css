@@ -4,11 +4,11 @@ body {
     padding: 0;
     background: url('Lexus background.jpg') no-repeat center center fixed; /* Add your background image here */
     background-size: cover; /* This will ensure the image covers the entire background */
-    color: #333; /* Default text color for better contrast */
+    color: hsl(0, 0%, 0%); /* Default text color for better contrast */
 }
 
 header {
-    background: rgba(51, 51, 51, 0.8); /* Semi-transparent background for the header */
+    background: rgba(51, 0, 255, 0.8); /* Semi-transparent background for the header */
     color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -44,6 +44,6 @@ section {
 footer {
     text-align: center;
     padding: 10px 0;
-    background: rgba(51, 51, 51, 0.8); /* Semi-transparent footer background */
+    background: rgba(51, 0, 255, 0.8); /* Semi-transparent footer background */
     color: #fff;
 }

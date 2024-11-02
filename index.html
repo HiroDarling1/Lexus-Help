@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexus Help</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic styling for the document viewer */
+        #document-viewer {
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-height: 300px; /* Set a max height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            margin: 20px 0; /* Add some space around it */
+        }
+
+        .document {
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,12 +27,21 @@
             <ul>
                 <li><a href="https://one.tis.toyota.com/" target="_blank">TIS</a></li>
                 <li><a href="https://www.adp.com/" target="_blank">ADP</a></li>
-                <li><a href="https://www.cdkglobal.com/" target="_blank">CDK</a></li>
+                <li><a href="https://login.connectcdk.com/login/login" target="_blank">CDK</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
+        <section id="document-viewer">
+            <h2>Document Viewer</h2>
+            <div class="document">
+                <h3>Document 1</h3>
+                <p>This is a brief description of Document 1. It contains important information regarding Lexus procedures.</p>
+            </div>
+            <!-- Add more documents as needed -->
+        </section>
+
         <section id="hour-tracker">
             <h2>Track Your Hours</h2>
             <form id="hours-form">
@@ -41,6 +64,20 @@
         <p>&copy; 2024 Lexus Help</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('hours-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
+            const week1Hours = parseFloat(document.getElementById('week-1-hours').value);
+            const week2Hours = parseFloat(document.getElementById('week-2-hours').value);
+
+            const grossPay = (week1Hours + week2Hours) * hourlyRate;
+
+            document.getElementById('result').textContent = `Gross Pay: $${grossPay.toFixed(2)}`;
+        });
+    </script>
 </body>
 </html>
+
+
