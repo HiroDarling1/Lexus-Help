@@ -5,20 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lexus Help</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Basic styling for the document viewer */
-        #document-viewer {
-            border: 1px solid #ccc;
-            padding: 10px;
-            max-height: 300px; /* Set a max height for scrolling */
-            overflow-y: auto; /* Enable vertical scrolling */
-            margin: 20px 0; /* Add some space around it */
-        }
-
-        .document {
-            margin-bottom: 15px;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -58,6 +44,16 @@
             </form>
             <p id="result"></p>
         </section>
+
+        <section class="comment-section">
+            <h2>Comments</h2>
+            <form id="comment-form">
+                <label for="comment">Leave a comment:</label>
+                <textarea id="comment" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+            <div id="comments-list"></div>
+        </section>
     </main>
 
     <footer>
@@ -65,19 +61,49 @@
     </footer>
 
     <script>
+        // Calculate gross pay
         document.getElementById('hours-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting
 
             const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
             const week1Hours = parseFloat(document.getElementById('week-1-hours').value);
             const week2Hours = parseFloat(document.getElementById('week-2-hours').value);
+            
+            if (hourlyRate < 0 || week1Hours < 0 || week2Hours < 0) {
+                document.getElementById('result').textContent = 'Please enter positive values.';
+                return;
+            }
 
             const grossPay = (week1Hours + week2Hours) * hourlyRate;
-
             document.getElementById('result').textContent = `Gross Pay: $${grossPay.toFixed(2)}`;
+
+            // Clear input fields after calculation
+            document.getElementById('hours-form').reset();
+        });
+
+        // Handle comments
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            const commentText = document.getElementById('comment').value;
+            const commentsList = document.getElementById('comments-list');
+
+            // Create a new comment element
+            const commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment');
+            commentDiv.textContent = commentText;
+
+            // Append the new comment to the comments list
+            commentsList.appendChild(commentDiv);
+
+            // Clear the comment input
+            document.getElementById('comment').value = '';
         });
     </script>
 </body>
 </html>
+
+
+
 
 

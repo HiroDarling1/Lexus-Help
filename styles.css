@@ -1,17 +1,19 @@
+/* Basic styling for the document viewer */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: url('Lexus background.jpg') no-repeat center center fixed; /* Add your background image here */
-    background-size: cover; /* This will ensure the image covers the entire background */
-    color: hsl(0, 0%, 0%); /* Default text color for better contrast */
+    background: url('Lexus background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: hsl(0, 0%, 0%); /* Default text color */
 }
 
 header {
-    background: rgba(51, 0, 255, 0.8); /* Semi-transparent background for the header */
-    color: #fff;
-    padding: 10px 0;
+    background: #000; /* Black background */
+    color: #fff; /* White text */
+    padding: 15px 0;
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
 }
 
 nav ul {
@@ -21,12 +23,17 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: hsl(210, 100%, 80%); /* Change color on hover */
 }
 
 main {
@@ -34,16 +41,32 @@ main {
 }
 
 section {
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background for sections */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
     margin: 15px 0;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px; /* Slightly more rounded corners */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for sections */
 }
 
 footer {
     text-align: center;
-    padding: 10px 0;
-    background: rgba(51, 0, 255, 0.8); /* Semi-transparent footer background */
-    color: #fff;
+    padding: 15px 0;
+    background: #000; /* Black background */
+    color: #fff; /* White text */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
 }
+
+button {
+    background: rgba(51, 0, 255, 0.8);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: rgba(51, 0, 255, 1);
+}
+
