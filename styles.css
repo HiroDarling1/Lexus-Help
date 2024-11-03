@@ -9,11 +9,24 @@ body {
 }
 
 header {
+    position: relative; /* Allow positioning of the logo */
     background: #000; /* Black background */
     color: #fff; /* White text */
-    padding: 15px 0;
+    padding: 5px 20px; /* Adjust padding to give space for the logo */
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+.logo {
+    position: absolute; /* Position it in the top left corner */
+    top: 10px; /* Adjust top position */
+    left: 20px; /* Adjust left position */
+    height: 120px; /* Set a height for the logo */
+    width: auto; /* Maintain aspect ratio */
+}
+
+nav {
+    display: inline-block; /* Allow the nav to be centered */
 }
 
 nav ul {
@@ -69,4 +82,3 @@ button {
 button:hover {
     background: rgba(51, 0, 255, 1);
 }
-
