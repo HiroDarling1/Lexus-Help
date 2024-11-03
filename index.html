@@ -21,10 +21,14 @@
 
     <main>
         <section id="document-viewer">
-            <h2>Document Viewer</h2>
+            <h2>CHEAT SHEETS</h2>
             <div class="document">
-                <h3>Document 1</h3>
-                <p>This is a brief description of Document 1. It contains important information regarding Lexus procedures.</p>
+                <h3>SERVICE HOURS</h3>
+                <p>Add Service Cheat Sheet.</p>
+            </div>
+            <div class="document">
+                <h3>SPARK PLUGS</h3>
+                <p>Add spark plug Cheat Sheet.</p>
             </div>
             <!-- Add more documents as needed -->
         </section>
@@ -62,6 +66,21 @@
     </footer>
 
     <script>
+        // Load comments on page load
+        function loadComments() {
+            const commentsList = document.getElementById('comments-list');
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+            
+            comments.forEach(commentText => {
+                const commentDiv = document.createElement('article');
+                commentDiv.classList.add('comment');
+                commentDiv.textContent = commentText;
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadComments);
+
         // Calculate gross pay
         document.getElementById('hours-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting
@@ -82,29 +101,26 @@
             document.getElementById('hours-form').reset();
         });
 
-        // Handle comments
+        // Handle comments submission
         document.getElementById('comment-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting
 
             const commentText = document.getElementById('comment').value;
             const commentsList = document.getElementById('comments-list');
-
-            // Create a new comment element
-            const commentDiv = document.createElement('div');
+            
+            const commentDiv = document.createElement('article');
             commentDiv.classList.add('comment');
             commentDiv.textContent = commentText;
 
-            // Append the new comment to the comments list
             commentsList.appendChild(commentDiv);
-
-            // Clear the comment input
             document.getElementById('comment').value = '';
+
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+            comments.push(commentText);
+            localStorage.setItem('comments', JSON.stringify(comments));
+            
+            alert('Thank you for your comment!');
         });
     </script>
 </body>
 </html>
-
-
-
-
-
