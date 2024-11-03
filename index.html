@@ -30,7 +30,6 @@
                 <h3>SPARK PLUGS</h3>
                 <p>Add spark plug Cheat Sheet.</p>
             </div>
-            <!-- Add more documents as needed -->
         </section>
 
         <section id="hour-tracker">
@@ -66,20 +65,25 @@
     </footer>
 
     <script>
+        const apiUrl = 'https://your-api-endpoint/comments'; // Update this to your server endpoint
+
         // Load comments on page load
-        function loadComments() {
-            const commentsList = document.getElementById('comments-list');
-            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+        async function fetchComments() {
+            const response = await fetch(apiUrl);
+            const comments = await response.json();
             
-            comments.forEach(commentText => {
+            const commentsList = document.getElementById('comments-list');
+            commentsList.innerHTML = ''; // Clear existing comments
+
+            comments.forEach(comment => {
                 const commentDiv = document.createElement('article');
                 commentDiv.classList.add('comment');
-                commentDiv.textContent = commentText;
+                commentDiv.textContent = comment.text; // Assuming the API returns an object with a text property
                 commentsList.appendChild(commentDiv);
             });
         }
 
-        document.addEventListener('DOMContentLoaded', loadComments);
+        document.addEventListener('DOMContentLoaded', fetchComments);
 
         // Calculate gross pay
         document.getElementById('hours-form').addEventListener('submit', function(event) {
@@ -88,7 +92,7 @@
             const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
             const week1Hours = parseFloat(document.getElementById('week-1-hours').value);
             const week2Hours = parseFloat(document.getElementById('week-2-hours').value);
-            
+
             if (hourlyRate < 0 || week1Hours < 0 || week2Hours < 0) {
                 document.getElementById('result').textContent = 'Please enter positive values.';
                 return;
@@ -102,25 +106,27 @@
         });
 
         // Handle comments submission
-        document.getElementById('comment-form').addEventListener('submit', function(event) {
+        document.getElementById('comment-form').addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent the form from submitting
 
             const commentText = document.getElementById('comment').value;
-            const commentsList = document.getElementById('comments-list');
-            
-            const commentDiv = document.createElement('article');
-            commentDiv.classList.add('comment');
-            commentDiv.textContent = commentText;
 
-            commentsList.appendChild(commentDiv);
-            document.getElementById('comment').value = '';
+            const newComment = { text: commentText }; // Create a new comment object
 
-            const comments = JSON.parse(localStorage.getItem('comments')) || [];
-            comments.push(commentText);
-            localStorage.setItem('comments', JSON.stringify(comments));
-            
+            // Send the new comment to the server
+            await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newComment),
+            });
+
+            document.getElementById('comment').value = ''; // Clear the comment input
+            fetchComments(); // Refresh the comments list
             alert('Thank you for your comment!');
         });
     </script>
 </body>
 </html>
+
