@@ -51,12 +51,7 @@
 
         <section class="comment-section">
             <h2>Comments</h2>
-            <form id="comment-form">
-                <label for="comment">Leave a comment:</label>
-                <textarea id="comment" rows="4" required></textarea>
-                <button type="submit">Submit</button>
-            </form>
-            <div id="comments-list"></div>
+            <div id="utterances"></div> <!-- This is the container for comments -->
         </section>
     </main>
 
@@ -64,69 +59,12 @@
         <p>&copy; 2024 Lexus Help</p>
     </footer>
 
-    <script>
-        const apiUrl = 'https://your-api-endpoint/comments'; // Update this to your server endpoint
-
-        // Load comments on page load
-        async function fetchComments() {
-            const response = await fetch(apiUrl);
-            const comments = await response.json();
-            
-            const commentsList = document.getElementById('comments-list');
-            commentsList.innerHTML = ''; // Clear existing comments
-
-            comments.forEach(comment => {
-                const commentDiv = document.createElement('article');
-                commentDiv.classList.add('comment');
-                commentDiv.textContent = comment.text; // Assuming the API returns an object with a text property
-                commentsList.appendChild(commentDiv);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', fetchComments);
-
-        // Calculate gross pay
-        document.getElementById('hours-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-
-            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
-            const week1Hours = parseFloat(document.getElementById('week-1-hours').value);
-            const week2Hours = parseFloat(document.getElementById('week-2-hours').value);
-
-            if (hourlyRate < 0 || week1Hours < 0 || week2Hours < 0) {
-                document.getElementById('result').textContent = 'Please enter positive values.';
-                return;
-            }
-
-            const grossPay = (week1Hours + week2Hours) * hourlyRate;
-            document.getElementById('result').textContent = `Gross Pay: $${grossPay.toFixed(2)}`;
-
-            // Clear input fields after calculation
-            document.getElementById('hours-form').reset();
-        });
-
-        // Handle comments submission
-        document.getElementById('comment-form').addEventListener('submit', async function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-
-            const commentText = document.getElementById('comment').value;
-
-            const newComment = { text: commentText }; // Create a new comment object
-
-            // Send the new comment to the server
-            await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newComment),
-            });
-
-            document.getElementById('comment').value = ''; // Clear the comment input
-            fetchComments(); // Refresh the comments list
-            alert('Thank you for your comment!');
-        });
+    <script src="https://utteranc.es/client.js"
+        repo="HiroDarling1/Lexus-Help"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
     </script>
 </body>
 </html>
-
